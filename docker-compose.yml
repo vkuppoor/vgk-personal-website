@@ -2,12 +2,17 @@ version: '3'
 
 services:
   nodejs:
-    #fill out the configuration here
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: website
+    container_name: nodejs
+    restart: unless-stopped
     networks:
       - app-network
-  
+
   #the nginx configuration is given below
-  #the website will run on localhost:80 
+  #the website will run on localhost:80
   webserver:
     image: nginx:mainline-alpine
     container_name: webserver
@@ -33,4 +38,4 @@ volumes:
 
 networks:
   app-network:
-    driver: bridge 
+    driver: bridge
